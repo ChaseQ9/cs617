@@ -1,6 +1,55 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+
 <html>
+	<head>
+		<style>
+body {
+	color: white;
+	background-color: black;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+}
+
+		svg {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+		</style>
+
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<script>
+			// Documentation
+			// - https://d3js.org/
+			let count = 0;
+
+			window.onload = function() {
+				s = d3.select('#s');
+				let interv = setInterval(function() {
+					if (count >= 100) {
+						console.log("At 100 random dots, exiting");
+						clearInterval(interv);
+						return;
+					}
+					s.append("circle")
+						.attr('cx', 1000*Math.random())
+						.attr('cy', 1000*Math.random())
+						.attr('r', 100*Math.random())
+						.attr('fill', 'hotpink');
+					count++;
+					console.log("Dot number %d", count);
+				}, 1000);
+			}
+
+		</script>
+
+	</head>
 	<body>
-		<p> Test </p>
+		<svg id='s'>
+		</svg>
 	</body>
 </html>
+
