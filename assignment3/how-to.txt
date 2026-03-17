@@ -1,0 +1,3 @@
+Copy output data from google colab
+Delete any data that contains the word "none"
+
