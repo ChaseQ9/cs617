@@ -10,43 +10,41 @@ function toggle() {
         frame.style.visibility = "hidden";
     }
 }
+
+function string_to_number(string) {
+    let data_array = string.split('\n')
+	.map(line => line.trim())
+	.filter(line => line !== "")
+	.map(Number);
+
+	return data_array 
+}
 window.onload = async function() {
     // Fetch both files
-    const latText = await (await fetch('./lat.txt?v=' + Date.now())).text();
+	// Docs: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+    const latText = await (await fetch('./lat.txt')).text();
     const lonText = await (await fetch('./long.txt')).text();
 
-    // Convert text → arrays (IMPORTANT)
-    const lattitude_array = latText.split('\n')
-	.map(line => line.trim())
-	.filter(line => line !== "")
-	.map(Number);
-
-	latText.split('\n').forEach((line, i) => {
-	  console.log(i, JSON.stringify(line), Number(line.trim()));
-	});
-
-    const longitude_array = lonText.split('\n')
-	.map(line => line.trim())
-	.filter(line => line !== "")
-	.map(Number);
+	const lattitude_array = string_to_number(latText);
+    const longitude_array = string_to_number(lonText); 
 
 	console.log(lattitude_array);
 	console.log(longitude_array);
     const data = [
         {
-            type: "densitymap",
+            type: "scattermapbox",
+			mode: "markers",
             lon: longitude_array,
             lat: lattitude_array,
-            radius: 10,
-            colorscale: "Viridis"
         }
     ];
 
     const layout = {
-		map: {style: "light", center: {lat: 42, lon: -71}},
-        width: 600,
-        height: 400
+		mapbox: {style: "carto-darkmatter", center: {lat: 42, lon: -71}, zoom: 8},
+		autosize: true,
     };
 
-    Plotly.newPlot("plot1", data, layout);
+    Plotly.newPlot("plot1", data, layout, {scrollzoom: true});
+    Plotly.newPlot("plot2", data, layout, {scrollzoom: true});
+
 }
