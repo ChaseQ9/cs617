@@ -1,6 +1,9 @@
 // Main js code here
-//
+// Google Colab Link:
+// https://colab.research.google.com/drive/172xRhtAd_kDpGGJTafF5-ZwknkoKAPCR#scrollTo=2b2F8qMmq2MJ
 
+// Function used to toggle showing the iframe containing
+// the boston pd data
 function toggle() {
     const frame = document.getElementById("data-frame");
 	console.log(frame.style.visibility); 
@@ -11,10 +14,12 @@ function toggle() {
     }
 }
 
+// Function used to convert a string of text
+// (seperated by newlines), into an array which 
+// can be used in plotly 
 function string_to_number(string) {
     let data_array = string.split('\n')
 	.map(line => line.trim())
-	.filter(line => line !== "")
 	.map(Number);
 
 	return data_array 
@@ -40,35 +45,27 @@ window.onload = async function() {
          'None': 21}
 
 	// https://police.boston.gov/districts/
-	const district_legend = {
-		'A1': 'Downtown',
-		'A15': 'Charlestown',
-		'A7': 'East Boston',
-		'B2': 'Roxbury',
-		'B3': 'Mattapan',
-		'C6': 'South Boston',
-		'C11': 'Dorchester',
-		'D4': 'South End',
-		'D14': 'Brighton',
-		'E5': 'West Roxbury',
-		'E13': 'Jamaica Plain',
-		'E18': 'Hyde Park'
-	}
 	// https://plotly.com/javascript/table/
-	var district_table = [
+	const district_table = [
 	['A1', 'A15', 'A7', 'B2', 'B3', 'C6', 'C11', 'D4', 'D14', 'E5', 'E13', 'E18'],
 	['Downtown', 'Charlestown', 'East Boston', 'Roxbury', 'Mattapan', 'South Boston', 'Dorchester', 'South End', 'Brighton', 'West Roxbury', 'Jamaica Plain', 'Hyde Park']
-	]
+	];
+
 	const data_table = [{
 		type: 'table',
 		header: {
 			values: [["<b>District Code</b>"], ["<b>District</b>"]],
-			align: "center"
+			align: "center",
+			fill: {color: 'gray'}
 		},
 		cells: {
 			values: district_table,
-			align: "center"
-		}
+			align: "center",
+			font: {
+				color: ['black']
+			}
+		},
+		autosize: true
 	}];
 
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
@@ -78,14 +75,11 @@ window.onload = async function() {
 		district_keys.push(key);
 		district_vals.push(District_Count[key]);
 	}
-	// These two arrays contain 1000 values - not every
-	// value within the dataset is present within these 
-	// arrays / points
+
 	const lattitude_array = string_to_number(latText);
     const longitude_array = string_to_number(lonText); 
 
-	console.log(lattitude_array);
-	console.log(longitude_array);
+	// https://plotly.com/javascript/scatter-tile-maps/
     const data_map_chart = [
         {
             type: "scattermapbox",
@@ -94,14 +88,8 @@ window.onload = async function() {
             lat: lattitude_array,
         }
     ];
-
-    const layout_map_chart = {
-		mapbox: {style: "carto-darkmatter", center: {lat: 42, lon: -71}, zoom: 8},
-		autosize: true,
-		width: 800,
-		height: 600,
-    };
-
+	
+	// https://plotly.com/javascript/bar-charts/
 	const data_bar_chart = [
 		{
 			x: district_keys,
@@ -109,14 +97,41 @@ window.onload = async function() {
 			type: 'bar'
 		}
 	];
+    const layout_map_chart = {
+		mapbox: {style: "carto-darkmatter", center: {lat: 42.3, lon: -71.1}, zoom: 10},
+		title: {
+			text: "Distribution of Crimes in Boston (1k entries)"
+		},
+		autosize: true,
+		width: 800,
+		height: 600,
+		paper_bgcolor: '#FFFDD0'
+    };
+
 
 	const layout_bar_chart = {
-		title: "Bar Chart",
+		title:  {
+			text: "Distribution of Crimes Within Boston Districts"
+		},
+		autosize: true,
 		width: 800,
-		height: 600
+		height: 600,
+		paper_bgcolor: '#FFFDD0',
+		plot_bgcolor: 'black'
 	}
-    Plotly.newPlot("plot1", data_map_chart, layout_map_chart, {scrollzoom: true});
+
+	const layout_table = {
+		paper_bgcolor: 'black',
+		title: {
+			text: "District Code Mappings"
+		}, 
+		font: {
+			color: 'white'
+		}
+	};
+
+    Plotly.newPlot("plot1", data_map_chart, layout_map_chart);
     Plotly.newPlot("plot2", data_bar_chart, layout_bar_chart);
-	Plotly.newPlot("plot3", data_table);
+	Plotly.newPlot("plot3", data_table, layout_table); 
 
 }
