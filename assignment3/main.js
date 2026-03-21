@@ -54,6 +54,22 @@ window.onload = async function() {
 		'E13': 'Jamaica Plain',
 		'E18': 'Hyde Park'
 	}
+	// https://plotly.com/javascript/table/
+	var district_table = [
+	['A1', 'A15', 'A7', 'B2', 'B3', 'C6', 'C11', 'D4', 'D14', 'E5', 'E13', 'E18'],
+	['Downtown', 'Charlestown', 'East Boston', 'Roxbury', 'Mattapan', 'South Boston', 'Dorchester', 'South End', 'Brighton', 'West Roxbury', 'Jamaica Plain', 'Hyde Park']
+	]
+	const data_table = [{
+		type: 'table',
+		header: {
+			values: [["<b>District Code</b>"], ["<b>District</b>"]],
+			align: "center"
+		},
+		cells: {
+			values: district_table,
+			align: "center"
+		}
+	}];
 
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in
 	const district_keys = [];
@@ -101,5 +117,6 @@ window.onload = async function() {
 	}
     Plotly.newPlot("plot1", data_map_chart, layout_map_chart, {scrollzoom: true});
     Plotly.newPlot("plot2", data_bar_chart, layout_bar_chart);
+	Plotly.newPlot("plot3", data_table);
 
 }
