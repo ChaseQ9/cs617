@@ -1,0 +1,28 @@
+
+html{
+	font-family: "JetBrains Mono", monospace;
+
+}
+body {
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+
+#container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+.vis {
+	border: 4px solid black;
+	border-radius: 8px;
+	box-shadow: 6px 6px 6px white;
+	transition: transform 0.3s ease;
+}
+
+.vis:hover {
+	transform: translateY(-5px);
+}
