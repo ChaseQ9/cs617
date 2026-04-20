@@ -1,7 +1,6 @@
 
 html{
 	font-family: "JetBrains Mono", monospace;
-
 }
 body {
 	background-color: black;
@@ -16,13 +15,27 @@ hr {
 	height: 2px;
 }
 
+button {
+	border: 1px solid white;
+	border-radius: 8px;
+	font-family: "JetBrains Mono", monospace;
+	transition: transform 0.3s ease;
+	background-color: #28282B;
+	color: white;
+}
+
+button:hover {
+	cursor: pointer;
+	transform: translateY(-5px);
+}
+
 #container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
-	gap: 20px;
+	padding: 2%;
+	gap: 5px;
 }
 
 #pie-charts {

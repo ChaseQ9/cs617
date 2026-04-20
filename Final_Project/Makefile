@@ -1,8 +1,8 @@
 
-default: propdata
+default: newdata 
 
-propdata: 
-	python3 ./cleanPropertyData.py
+newdata: 
+	./parse.py
 
 clean:
-	rm -f ./prop.json
+	rm -f ./data/HockeyRef/dataJSON
