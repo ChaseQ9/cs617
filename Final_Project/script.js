@@ -1,4 +1,3 @@
-const DATAPATH = "./data/HockeyRef";
 
 const spec = {
 	"data": {
@@ -20,49 +19,34 @@ const spec = {
 
 let groupBar = {
 	"data": {
-		"url": "./data/BruinsData/dataJSON/bos_teamstats.json",
+		"url": "./data/BruinsData/dataJSON/bos_seasonresults.json",
 		"format": "json"
 	},
-	"mark": "bar",
+	"mark": "line",
 	"encoding": {
 		"x": {
+			"field": "Date",
+			"type": "nominal"
+		},
+		"y": {
 			"field": "GF",
 			"type": "quantitative"
 		},
-		"y": {
-			"field": "S",
-			"type": "quantitative"
-		},
-		"xOffset": {
-			"field": "Team"
-		},
-		"color": {
-			"field": "Team"
-		}
 	}
 };
 
-function generateSpec(specInfo) {
-	const spec = {
-		"data": {
-			"url": specInfo.url,
-			"format": "json"
-		},
-		"mark": specInfo.mark,
-		"encoding": specInfo.encoding
-	};
-	return spec;
-}
-
 function vis(spec) {
 	vegaEmbed("#vis", spec, {actions: false});
-
 }
-function main() {
-	console.log("main");
+
+function main(Team) {
 	vis(groupBar);
 }
 
 window.onload = () => {
-	main();
+	let Bruins = document.getElementById("Bruins");
+	let RedSox = document.getElementById("RedSox");
+	let Celtics = document.getElementById("Celtics");
+	let Patriots = document.getElementById("Patriots");
+	main(Bruins);
 }

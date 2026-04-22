@@ -16,7 +16,7 @@ hr {
 }
 
 button {
-	border: 1px solid white;
+	border: 2px solid white;
 	border-radius: 8px;
 	font-family: "JetBrains Mono", monospace;
 	transition: transform 0.3s ease;

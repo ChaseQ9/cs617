@@ -5,4 +5,4 @@ newdata:
 	./parse.py
 
 clean:
-	rm -f ./data/HockeyRef/dataJSON
+	- ./cleanup.sh || printf 'Error removing all dataJSON files\n'
