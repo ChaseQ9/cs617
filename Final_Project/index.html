@@ -3,37 +3,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>CS617 Final Project</title>
-		<script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.2"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vega-embed@7.1.0"></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="./style.css">	
+		<script src="https://d3js.org/d3.v7.min.js"></script>
 	</head>
 	<body>
 		<h1>Boston Sports Data (25-26 Season)</h1>
-		<button id="Bruins">Bruins Data</button>
-		<button id="RedSox">Red Sox Data</button>
-		<button id="Celtics">Celtics Data</button>
-		<button id="Patriots">Patriots Data</button>
 		<div id="container">
 			<h3>Bruins Data</h3>
-			<div id="vis" class="vis"></div>
+			<svg id="vis">
+
+			</svg>
 			<hr>
-			<div id="pie-charts">
-				<div id="vis2" class="vis"></div>
-				<div id="vis3" class="vis"></div>
 			</div>
 			<hr>
 		</div>
 		<footer>
 			<p>Chase Quigley + CS617</p>
 		</footer>
-		<script src="./team_scripts/bruins.js"></script>
-		<script src="./team_scripts/redsox.js"></script>
-		<script src="./team_scripts/celtics.js"></script>
-		<script src="./team_scripts/patriots.js"></script>
 		<script type="module"  src="script.js"></script>
 	</body>
 </html>
