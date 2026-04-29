@@ -18,13 +18,17 @@ const y_scale = d3.scaleLinear().range([height, 0]);
 
 // The date reflects when the season Starts (2025-2026 season is '2025')
 function chartFranchiseResults(team) {
-	d3.csv(`./data/${team}Data/franchiseresults.csv`).then(function(data) {
+	Promise.all([
+		d3.csv(`./data/${team}Data/franchiseresults.csv`),
+		d3.csv(`./data/${team}Data/cmpfranchiseresults.csv`),
+	]).then(function(data1, data2) {
 		let timeColumn = "Year";
 		data.forEach((d) => {
 			d.Year = formatYear(d.Year);
 			d.W = +d.W;
 			d.L = +d.L;
 		});
+		console.log(data2);
 		data.sort((a, b) => a.Year - b.Year);
 		
 		const svg = d3.select(`#${team}`).append("svg").attr("width", width + marginLeft + marginRight).attr("height", height + marginTop + marginBottom).append("g").attr("transform", `translate(${marginLeft},${marginTop})`);
