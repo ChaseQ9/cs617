@@ -1,4 +1,4 @@
-Year,Tm,Lg,G,W,L,Ties,W-L%,pythW-L%,Finish,GB,Playoffs,R,RA,Attendance,BatAge,PAge,#Bat,#P,Top Player,Managers
+Year,Team,Lg,G,W,L,Ties,W-L%,pythW-L%,Finish,GB,Playoffs,R,RA,Attendance,BatAge,PAge,#Bat,#P,Top Player,Managers
 2026,Chicago White Sox,AL Central,30,13,17,0,.433,.418,3rd of 5,2.0,,126,151,246030,25.9,28.4,40,24,D.Martin (1.8),W.Venable (13-17)
 2025,Chicago White Sox,AL Central,162,60,102,0,.370,.438,5th of 5,28.0,,647,742,1445738,26.9,27.5,62,33,C.Montgomery (3.3),W.Venable (60-102)
 2024,Chicago White Sox,AL Central,162,41,121,0,.253,.296,5th of 5,51.5,,507,813,1380733,27.8,27.7,63,35,E.Fedde (4.6),P.Grifol (28-89) and G.Sizemore (13-32)

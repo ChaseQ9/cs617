@@ -1,10 +1,10 @@
 // Chase Quigley
 // CS617 
 let marginTop = 60;
-let marginLeft = 60;
-let marginRight = 60;
+let marginLeft = 100;
+let marginRight = 100;
 let marginBottom = 60;
-let width = 1000 - marginLeft - marginRight;
+let width = 1200 - marginLeft - marginRight;
 let height = 600 - marginTop - marginBottom;
 
 const formatTime = d3.timeParse("%Y-%m-%d");
@@ -39,24 +39,32 @@ function chartFranchiseResults(team) {
 		
 		const svg = d3.select(`#${team}`).append("svg").attr("width", width + marginLeft + marginRight).attr("height", height + marginTop + marginBottom).append("g").attr("transform", `translate(${marginLeft},${marginTop})`);
 		const x = d3.scaleTime().domain(d3.extent(data, d => d.Year)).range([0, width]);
+		const cmpx = d3.scaleTime().domain(d3.extent(data2, d => d.Year)).range([0, width]);
 		const y = d3.scaleLinear().domain([0, d3.max(data, d => Math.max(d.W, d.L))]).range([height, 0]).nice();
+		const cmpy = d3.scaleLinear().domain([0, d3.max(data2, d => Math.max(d.W, d.L))]).range([height, 0]).nice();
 		svg.append("g").attr("transform", `translate(0, ${height})`).call(d3.axisBottom(x));
 		svg.append("g").call(d3.axisLeft(y).tickFormat(d3.format("d")));
 
 		const winLine = d3.line().x(d => x(d.Year)).y(d => y(d.W));
 		const loseLine = d3.line().x(d => x(d.Year)).y(d => y(d.L));
-		
+		const cmpWinLine = d3.line().x(d => cmpx(d.Year)).y(d => cmpy(d.W));
+
 		// Plot the Wins and Loses
 		let winColor = "green";
 		let lossColor = "red";
+		let cmpColor = "steelblue";
+
 		const winPath = svg.append("path").datum(data).attr("fill", "none").attr("stroke", winColor).attr("stroke-width", 2).attr("d", winLine);
 		const lossPath = svg.append("path").datum(data).attr("fill", "none").attr("stroke", lossColor).attr("stroke-width", .5).attr("d", loseLine);
+		const cmpPath = svg.append("path").datum(data2).attr("fill", "none").attr("stroke", cmpColor).attr("stroke-width", .5).attr("d", cmpWinLine);
 		const tLength = winPath.node().getTotalLength();
 		winPath.attr("stroke-dasharray", tLength).attr("stroke-dashoffset", tLength).transition().duration(3000).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
 		lossPath.attr("stroke-dasharray", "8,4").style("opacity", 0).transition().delay(1000).duration(3000).style("opacity", 1);
+		cmpPath.attr("stroke-dasharray", tLength).attr("stroke-dashoffset", tLength).transition().duration(3000).ease(d3.easeLinear).attr("stroke-dashoffset", 0);
 		
-		svg.append("text").attr("x", width - 100).attr("y", 0).attr("fill", winColor).text("Wins");
-		svg.append("text").attr("x", width - 100).attr("y", 20).attr("fill", lossColor).text("Losses");
+		svg.append("text").attr("x", width - 200).attr("y", 0).attr("fill", winColor).text("Wins");
+		svg.append("text").attr("x", width - 200).attr("y", 20).attr("fill", lossColor).text("Losses");
+		svg.append("text").attr("x", width - 200).attr("y", 40).attr("fill", cmpColor).text(`${data2[0].Team} Wins`);
 		// Create a headline
 		let headlineText = `${team}'s Franchise History Results`;
 		svg.append("text").attr("x", (width / 2)).attr("y", 0 - (marginTop / 2)).attr("text-anchor", "middle").style("font-size", "16px").style("fill", "white").text(headlineText);
