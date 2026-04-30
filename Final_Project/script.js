@@ -20,16 +20,22 @@ const y_scale = d3.scaleLinear().range([height, 0]);
 function chartFranchiseResults(team) {
 	Promise.all([
 		d3.csv(`./data/${team}Data/franchiseresults.csv`),
-		d3.csv(`./data/${team}Data/cmpfranchiseresults.csv`),
-	]).then(function(data1, data2) {
+		d3.csv(`./data/${team}Data/cmpfranchiseresults.csv`)
+	]).then(function([data, data2]) {
 		let timeColumn = "Year";
 		data.forEach((d) => {
 			d.Year = formatYear(d.Year);
 			d.W = +d.W;
 			d.L = +d.L;
 		});
-		console.log(data2);
+		data2.forEach((d) => {
+			d.Year = formatYear(d.Year);
+			d.W = +d.W;
+			d.L = +d.L;
+		});
+		
 		data.sort((a, b) => a.Year - b.Year);
+		data2.sort((a, b) => a.Year - b.Year);
 		
 		const svg = d3.select(`#${team}`).append("svg").attr("width", width + marginLeft + marginRight).attr("height", height + marginTop + marginBottom).append("g").attr("transform", `translate(${marginLeft},${marginTop})`);
 		const x = d3.scaleTime().domain(d3.extent(data, d => d.Year)).range([0, width]);
