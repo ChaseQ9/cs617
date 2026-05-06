@@ -60,6 +60,66 @@ button:hover {
 	transition: transform 0.3s ease;
 }
 
+.team-info {
+	display: flex;
+	width: 100%;
+	height: 200px;
+	justify-content: space-between;
+	gap: 5%;
+	flex-direction: row;
+}
+
+.video {
+	position: relative;
+	padding-bottom: 55%;
+	height: 0%;
+}
+
+.mvp {
+	display: flex;
+	align-items: left;
+	gap: 20px;
+}
+
+.mvp-text {
+	gap: 5px;
+	padding: 0px;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.mvp-text h3 {
+	font-size: 20px !important;
+}
+.pfp {
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	border-radius:50%;
+	border: 2px solid white;
+}
+
+.pfp img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.video iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 80%;
+}
+
+.team-info > div {
+	flex: 1;
+	background-color: black;
+	padding: 10px;
+	border: 1px solid white;
+	border-radius: 8px;
+}
 .story-card:hover {
 	transform: translateY(-5px);
 }

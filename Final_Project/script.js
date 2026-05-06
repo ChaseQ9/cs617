@@ -110,7 +110,7 @@ function chartFranchiseResults(team) {
 		
 		let x = d3.scaleTime().domain(d3.extent(allData, d => d.Year)).range([0, width]);
 		let y = d3.scaleLinear().domain([0, d3.max(allData, d => Math.max(d.W, d.L))]).range([height, 0]).nice();
-		let svg = d3.select(`#${team}`).append("svg").attr("width", width + marginLeft + marginRight).attr("height", height + marginTop + marginBottom + 40).append("g").attr("transform", `translate(${marginLeft},${marginTop})`);
+		let svg = d3.select(`#${team}Graph`).append("svg").attr("width", width + marginLeft + marginRight).attr("height", height + marginTop + marginBottom + 40).append("g").attr("transform", `translate(${marginLeft},${marginTop})`);
 		svg.append("g").attr("transform", `translate(0, ${height})`).call(d3.axisBottom(x));
 		svg.append("g").call(d3.axisLeft(y).tickFormat(d3.format("d")));
 
