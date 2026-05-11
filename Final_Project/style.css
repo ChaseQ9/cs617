@@ -82,11 +82,15 @@ button:hover {
 }
 
 .mvp-text {
-	gap: 5px;
 	padding: 0px;
 	margin: 0;
 	display: flex;
 	flex-direction: column;
+}
+
+.mvp-text p {
+	padding: 0;
+	margin: 0;
 }
 
 .mvp-text h3 {
