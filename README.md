@@ -29,7 +29,7 @@ This project uses historical team performance data and interactive charts to exp
 ### Data-Driven UI
 
 * Dynamic chart generation using JavaScript and D3.js
-* CSV/JSON-driven datasets
+* CSV driven datasets
 * Scalable structure for adding additional teams or statistics
 
 ---
